@@ -16,22 +16,22 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        prevStateIsNavBatHidden = navigationController?.isNavigationBarHidden ?? false
+//        prevStateIsNavBatHidden = navigationController?.isNavigationBarHidden ?? true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(isNavBarHidden, animated: true)
+//        navigationController?.setNavigationBarHidden(isNavBarHidden, animated: true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        navigationController?.setNavigationBarHidden(prevStateIsNavBatHidden, animated: true)
+//        navigationController?.setNavigationBarHidden(prevStateIsNavBatHidden, animated: true)
     }
     
     func setNavBarState(isHidden: Bool) {
-        isNavBarHidden = isHidden
+//        isNavBarHidden = isHidden
     }
 }

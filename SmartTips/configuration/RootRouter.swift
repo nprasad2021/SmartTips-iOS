@@ -10,12 +10,8 @@ class RootRouter {
     }
     
     func presentInitialViewController() {
-//        let view = MapRouter.assemble()
-//        let view = TipOnboardingViewController()
-//        let view = TipViewController(id: 0, orderSum: 2093)
         let view = TabBarRouter.assemble()
-        let navigation = UINavigationController(rootViewController: view)
-        setRootViewController(navigation, animated: false)
+        setRootViewController(view, animated: false)
     }
     
     private func setRootViewController(_ controller: UIViewController, animated: Bool) {

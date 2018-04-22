@@ -16,7 +16,7 @@ extension AppDelegate {
         
         let strongWindow = UIWindow(frame: UIScreen.main.bounds)
         self.window = strongWindow
-        router = RootRouter.init(window: strongWindow)
+        router = RootRouter(window: strongWindow)
         router.presentInitialViewController()
         
         NMAApplicationContext.set(appId: kHelloMapAppID, appCode: kHelloMapAppCode)

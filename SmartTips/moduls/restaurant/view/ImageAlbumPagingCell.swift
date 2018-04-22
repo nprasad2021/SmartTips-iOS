@@ -85,27 +85,27 @@ class ImageAlbumPagingCell: UICollectionViewCell, Reusable {
         images.removeAll()
         
         var leftConstraint: ConstraintItem = scrollView.snp.left
-//        restaurant.imageStrings.forEach { (str) in
-//            let imageView = UIImageView()
-//            imageView.contentMode = .scaleAspectFill
-//            images.append(imageView)
-//            NukeManager.loadImage(with: str, placeholder: #imageLiteral(resourceName: "rest_placeholder"), target: imageView)
-//
-//            scrollView.addSubview(imageView)
-//
-//            imageView.snp.makeConstraints {
-//                $0.left.equalTo(leftConstraint)
-//                $0.top.equalToSuperview()
-//                $0.width.equalTo(frame.width)
-//                $0.height.equalTo(150)
-//
-//                if images.count == restaurant.imageStrings.count {
-//                    $0.right.equalToSuperview()
-//                }
-//            }
-//
-//            leftConstraint = imageView.snp.right
-//        }
+        restaurant.imageStrings.forEach { (str) in
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFill
+            images.append(imageView)
+            NukeManager.loadImage(with: str, placeholder: #imageLiteral(resourceName: "rest_placeholder"), target: imageView)
+
+            scrollView.addSubview(imageView)
+
+            imageView.snp.makeConstraints {
+                $0.left.equalTo(leftConstraint)
+                $0.top.equalToSuperview()
+                $0.width.equalTo(frame.width)
+                $0.height.equalTo(150)
+
+                if images.count == restaurant.imageStrings.count {
+                    $0.right.equalToSuperview()
+                }
+            }
+
+            leftConstraint = imageView.snp.right
+        }
 
         pageControl.numberOfPages = restaurant.imageStrings.count
         titleLabel.text = restaurant.name

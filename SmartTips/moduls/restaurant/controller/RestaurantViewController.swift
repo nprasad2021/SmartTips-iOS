@@ -26,6 +26,14 @@ class RestaurantViewController: ViewController {
         setViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if navigationController?.isNavigationBarHidden == true {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+    
     private func loadRestauranInfo() {
         NetworkingManager.shared.request(.rates(id: restaurant.id))
             .map(to: RestaurantParsing.self)

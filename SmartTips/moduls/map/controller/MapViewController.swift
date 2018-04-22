@@ -39,11 +39,14 @@ class MapViewController: ViewController {
         configureMapView()
         triggerDataUpdate()
         setBindings()
-        hideNavBar()
     }
     
-    private func hideNavBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if navigationController?.isNavigationBarHidden == false {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
     }
     
     private func triggerDataUpdate() {
