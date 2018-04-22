@@ -9,10 +9,12 @@ class TabBarRouter: RouterContract {
         
         let tipsNavigationController = UINavigationController(rootViewController: TipOnboardingViewController())
         let mapNaivgationController = UINavigationController(rootViewController: MapRouter.assemble())
+        let profileNavigationController = UINavigationController(rootViewController: ProfileRouter.assembleCustomer())
         
         view.viewControllers = [
             tipsNavigationController,
-            mapNaivgationController
+            mapNaivgationController,
+            profileNavigationController
         ]
         router.view = view
         return view
