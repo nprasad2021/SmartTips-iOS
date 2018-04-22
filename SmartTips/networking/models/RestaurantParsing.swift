@@ -28,6 +28,7 @@ final class RestaurantParsing {
         model.rating = rating
         model.tipTransactions = tips
         model.directionsURLString = directionURLString
+        model.imageStrings = [image_url]
         
         return model
     }

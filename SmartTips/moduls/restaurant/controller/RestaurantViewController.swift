@@ -63,7 +63,7 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         guard section > 0 else { return .zero }
         
-        return UIEdgeInsets(top: 15, left: 20, bottom: 15, right: 20)
+        return UIEdgeInsets(top: 15, left: 20, bottom: 50, right: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -76,7 +76,7 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
         
         let mainHeight: CGFloat = 60
         let transactionWidth: CGFloat = width - 20 * 2
-        guard let comment = restaurant.tipTransactions[indexPath.item].comment else {
+        guard let comment = restaurant.tipTransactions[indexPath.item].comment, !comment.isEmpty else {
             return CGSize(width: transactionWidth, height: mainHeight)
         }
         let commentHeight = comment.height(withConstrainedWidth: transactionWidth, font: .stGeometria(ofSize: 15))

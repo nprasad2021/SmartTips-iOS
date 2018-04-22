@@ -41,22 +41,6 @@ DEPENDENCIES:
   - SwiftyBeaver
   - SwiftyJSON
 
-SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Alamofire
-    - Cosmos
-    - HEREMapsStarter
-    - Moya
-    - Nuke
-    - Result
-    - Reusable
-    - RxCocoa
-    - RxGesture
-    - RxSwift
-    - SnapKit
-    - SwiftyBeaver
-    - SwiftyJSON
-
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
@@ -74,4 +58,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 0112258e39dc2688cae17c77870791806b841507
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.4.0

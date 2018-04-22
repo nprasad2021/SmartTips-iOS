@@ -65,7 +65,7 @@ private class Cell: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.stHelvetica(ofSize: 14)
+        label.font = UIFont.stHelveticaNeue(ofSize: 16)
         label.textAlignment = .left
         return label
     }()

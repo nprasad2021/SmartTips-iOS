@@ -8,10 +8,18 @@ class TipViewController: ViewController {
     
     private var restaurant: Restaurant? = Restaurant.sampleData
     private var titles: [String] = []
+    private var percentages: [Double] = []
     private var selectedIndex: Int = 1
+    
+    private let bag = DisposeBag()
     
     private let activityIndicator: UIActivityIndicatorView = {
        let view = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        return view
+    }()
+    private let loadingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
         return view
     }()
     
@@ -30,26 +38,69 @@ class TipViewController: ViewController {
     
         view.backgroundColor = UIColor.white
         
-        setViews()
-        setTitles(8)
+        setLoadingState()
+        loadRestaurantInfo()
+    }
+    
+    private func setLoadingState() {
+        view.addSubview(loadingView)
+        loadingView.addSubview(activityIndicator)
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    private func removeLoadingState() {
+        loadingView.removeFromSuperview()
+    }
+    
+    private func getPercentage(by number: Double) -> [Double] {
+        var procents: [Double] = []
+        if number > 5.0 {
+            procents = [5, number, 10]
+        } else if abs(number.round(toDigits: 2) - 10.0) < 0.01 {
+            procents = [5, 10, 15]
+        } else {
+            procents = [10, number, 15]
+        }
+        
+        return procents
     }
     
     private func setTitles(_ average: Double) {
         guard self.restaurant != nil else { return }
         
-        var procents: [Double] = []
-        if average > 5.0 {
-            procents = [5, average, 10]
-        } else if average == 10.0 {
-            procents = [5, 10, 15]
-        } else {
-            procents = [10, average, 15]
-        }
+        percentages = getPercentage(by: average)
      
-        titles = procents.map { (value) in
+        titles = percentages.map { (value) in
             return "\(value) % - \(orderSum * value / 100) ₽"
         }
         collectionView.reloadData()
+    }
+    
+    private func loadRestaurantInfo() {
+        NetworkingManager.shared.requestWithSuccessStatus(.rates(id: id)).map(to: RestaurantParsing.self)
+            .subscribe(onNext: { [weak self] (data) in
+                guard let `self` = self else { return }
+                self.removeLoadingState()
+                self.setViews()
+                self.setTitles(data.average_rate)
+            }, onError: { [weak self] (_) in
+                guard let `self` = self else { return }
+                let alert = UIAlertController(title: "Unable to download data, retry?", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "yes", style: .default, handler: { (_) in
+                    self.loadRestaurantInfo()
+                }))
+                alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: { (_) in
+                    self.navigationController?.popToRootViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }).disposed(by: bag)
     }
     
     private func setViews() {
@@ -68,13 +119,27 @@ class TipViewController: ViewController {
     }
     
     private func sendTips() {
-        guard let cell = collectionView.cellForItem(at: IndexPath(item: 2, section: 0)) as? TextFieldCell else {
-            return
+        var amount: Double = 0.0
+        guard let cell = collectionView.cellForItem(at: IndexPath(item: 2, section: 0)) as? TextFieldCell else { return }
+        if let cellAmount = cell.tipAmount, selectedIndex >= percentages.count {
+            amount = Double(cellAmount)
+        } else {
+            amount = percentages[selectedIndex]
         }
         
-        guard let amount = cell.tipAmount else { return }
-        // cell.comment
-        // amount
+        NetworkingManager.shared.requestWithSuccessStatus(.postTip(id: id, amount: amount, rate: (Double(amount) / orderSum).round(toDigits: 2), comment: cell.comment))
+            .subscribe(onNext: { (_) in
+                let alert = UIAlertController(title: "Tip was sent!", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okey", style: .default, handler: { (_) in
+                    self.tabBarController?.selectedIndex = 1
+                    self.navigationController?.popToRootViewController(animated: false)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }, onError: { (error) in
+                let alert = UIAlertController(title: "Unable to send tips!", message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okey", style: .default, handler: { (_) in }))
+                self.present(alert, animated: true, completion: nil)
+            }).disposed(by: bag)
     }
 }
 
