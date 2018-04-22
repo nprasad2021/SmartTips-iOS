@@ -13,6 +13,9 @@ class ProfileRouter: RouterContract {
     }
     
     static func assembleWaiter() -> UIViewController {
-        fatalError()
+        let router = ProfileRouter()
+        guard let view = UIStoryboard(name: storyboardMapIdentifier, bundle: Bundle.main).instantiateViewController(withIdentifier: "waiter") as? WaiterViewController else { fatalError() }
+        router.view = view
+        return view
     }
 }

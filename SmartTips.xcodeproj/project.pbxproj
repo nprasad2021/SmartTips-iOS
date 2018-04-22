@@ -68,6 +68,7 @@
 		7DD90BDA208C242A00314612 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD90BD7208C242A00314612 /* NetworkingManager.swift */; };
 		7DD90BDC208C243D00314612 /* NetworkActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD90BDB208C243D00314612 /* NetworkActivityManager.swift */; };
 		7DD90BDE208C28C100314612 /* RestaurantParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD90BDD208C28C100314612 /* RestaurantParsing.swift */; };
+		7DD90BE2208C5EFE00314612 /* WaiterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD90BE1208C5EFE00314612 /* WaiterViewController.swift */; };
 		7DEE5F63208B5DE4009AC443 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE5F62208B5DE4009AC443 /* LocationManager.swift */; };
 		7DEE5F66208B5E0B009AC443 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE5F65208B5E0B009AC443 /* Location.swift */; };
 		7DEE5F68208B5E54009AC443 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE5F67208B5E54009AC443 /* AppState.swift */; };
@@ -140,6 +141,8 @@
 		7DD90BD7208C242A00314612 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		7DD90BDB208C243D00314612 /* NetworkActivityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkActivityManager.swift; sourceTree = "<group>"; };
 		7DD90BDD208C28C100314612 /* RestaurantParsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantParsing.swift; sourceTree = "<group>"; };
+		7DD90BDF208C5C7100314612 /* SmartTips.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmartTips.entitlements; sourceTree = "<group>"; };
+		7DD90BE1208C5EFE00314612 /* WaiterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaiterViewController.swift; sourceTree = "<group>"; };
 		7DEE5F62208B5DE4009AC443 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7DEE5F65208B5E0B009AC443 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7DEE5F67208B5E54009AC443 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 		7D0A2309208B351D009477C2 /* SmartTips */ = {
 			isa = PBXGroup;
 			children = (
+				7DD90BDF208C5C7100314612 /* SmartTips.entitlements */,
 				7DD90B71208B6C2B00314612 /* logger */,
 				7D0A231C208B3556009477C2 /* moduls */,
 				7D0A231D208B355A009477C2 /* networking */,
@@ -299,6 +303,7 @@
 		7D0A2331208B4597009477C2 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7DD90BE1208C5EFE00314612 /* WaiterViewController.swift */,
 				7D0A2332208B45A1009477C2 /* ProfileViewController.swift */,
 			);
 			path = view;
@@ -540,6 +545,11 @@
 				TargetAttributes = {
 					7D0A2306208B351D009477C2 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -686,6 +696,7 @@
 				7DD90BB3208BBA2F00314612 /* TipTransaction.swift in Sources */,
 				7DD90B5D208B63ED00314612 /* RestaurantPin.swift in Sources */,
 				7DD90BD9208C242A00314612 /* ServerAPIType.swift in Sources */,
+				7DD90BE2208C5EFE00314612 /* WaiterViewController.swift in Sources */,
 				7DEE5F66208B5E0B009AC443 /* Location.swift in Sources */,
 				7DD90BAB208BABFF00314612 /* CollectionView.swift in Sources */,
 				7DD90B57208B631600314612 /* Nuke+Url.swift in Sources */,
@@ -854,11 +865,15 @@
 			baseConfigurationReference = B04FC09655098D3D83372B3C /* Pods-SmartTips.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SmartTips/SmartTips.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 399XL7K7FH;
 				INFOPLIST_FILE = SmartTips/resources/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartTips.SmartTips;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.smarttips.Tips;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -870,11 +885,15 @@
 			baseConfigurationReference = 68F70089C07321DB145B7681 /* Pods-SmartTips.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SmartTips/SmartTips.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 399XL7K7FH;
 				INFOPLIST_FILE = SmartTips/resources/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.smartTips.SmartTips;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.smarttips.Tips;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
