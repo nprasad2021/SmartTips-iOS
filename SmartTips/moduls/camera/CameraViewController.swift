@@ -30,7 +30,15 @@ class CameraViewController: ViewController {
         view.layoutIfNeeded()
         configureAVSession()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if navigationController?.isNavigationBarHidden == true {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+
     private func setViews() {
         view.addSubview(qrCodeFrameView)
         view.addSubview(cameraSquare)
