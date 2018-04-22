@@ -96,6 +96,12 @@ extension RestaurantViewController: UICollectionViewDataSource {
         case 0:
             let cell: ImageAlbumPagingCell = collectionView.dequeueReusableCell(for: indexPath)
             cell.configure(restaurant)
+            cell.buttonDidTouch.subscribe(onNext: { [weak self] _ in
+                guard let `self` = self else { return }
+                let application = UIApplication.shared
+                let url = self.restaurant.directionsURL
+                application.open(url)
+            }).disposed(by: cell.bag)
             return cell
         case 1:
             let cell: TransactionCell = collectionView.dequeueReusableCell(for: indexPath)

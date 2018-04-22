@@ -38,7 +38,7 @@ extension TipTransaction: JSONable {
         transaction.value = json["amount"].intValue
         transaction.comment = json["comment"].stringValue
         transaction.recepient = json["user"]["first_name"].stringValue + " " + json["user"]["last_name"].stringValue
-        transaction.recepientImageUrl = ""
+        transaction.recepientImageUrl = json["user"]["image_url"].stringValue
         return transaction
     }
 }

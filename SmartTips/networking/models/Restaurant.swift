@@ -28,20 +28,26 @@ final class Restaurant {
     var contacts: [Contact] = []
     var address: String = ""
     var rating: Double = 0
+    var directionsURLString: String = ""
     var imageStrings: [String] = []
     var tipTransactions: [TipTransaction] = []
+
+    var directionsURL: URL {
+        return URL(string: self.directionsURLString)!
+    }
 }
 
 extension Restaurant: SampleDataProvider {
     static var sampleData: Restaurant {
         defer { sampleDataProviderCounter += 1 }
-        
+
         let data = Restaurant()
         data.contacts = [Contact.sampleData, Contact.sampleData, Contact.sampleData]
         data.name = names[sampleDataProviderCounter % names.count]
         data.imageUrlString = imageUrls[sampleDataProviderCounter % imageUrls.count]
         data.location = Location.sampleData
         data.address = addresses[sampleDataProviderCounter % addresses.count]
+        data.directionsURLString = "here-route://55.76996,37.595914/55.78176,37.599056"
         data.rating = Double(6 + 2 * randomScale())
         data.imageStrings = imageUrls
         data.tipTransactions = [

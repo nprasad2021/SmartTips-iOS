@@ -10,6 +10,7 @@ final class RestaurantParsing {
     var is_tipping_available: Bool = true
     var location_latitude: Double = 0.0
     var location_longitude: Double = 0.0
+    var directionURLString: String = ""
     var name: String = ""
     var rating: Double = 0.0
     var tips: [TipTransaction] = []
@@ -26,6 +27,7 @@ final class RestaurantParsing {
         model.address = address
         model.rating = rating
         model.tipTransactions = tips
+        model.directionsURLString = directionURLString
         
         return model
     }
@@ -42,6 +44,7 @@ extension RestaurantParsing: JSONable {
         model.is_tipping_available = json["is_tipping_available"].boolValue
         model.location_latitude = json["location_latitude"].doubleValue
         model.location_longitude = json["location_longitude"].doubleValue
+        model.directionURLString = json["here_directions_url"].stringValue
         model.name = json["name"].stringValue
         model.rating = json["rating"].doubleValue
         model.tips = json["tips"].array?.compactMap { try? TipTransaction.fromJSON($0) } ?? []

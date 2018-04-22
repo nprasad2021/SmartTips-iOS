@@ -5,20 +5,20 @@ enum ServerAPI {
     case places(location: Location)
     case rates(id: Int)
     case waiter(id: Int)
-    case postTip(id: Int, amount: Int, rate: Double, comment: String)
+    case postTip(id: Int, amount: Int, rate: Double, comment: String?)
 }
 
 extension ServerAPI: TargetType, ServerAPIType {
     var path: String {
         switch self {
         case .places:
-            return "/places/"
+            return "places/"
         case .rates(let id):
             return "places/\(id)/rates/"
         case .waiter(let id):
-            return "api/waiters/\(id)/"
+            return "waiters/\(id)/"
         case .postTip(let id, _, _, _):
-            return "places/\(id)/rates/"
+            return "tips/"
         }
     }
     
@@ -47,12 +47,20 @@ extension ServerAPI: TargetType, ServerAPIType {
     var bodyParams: [String: Any]? {
         switch self {
         case .postTip(let id, let amount, let rate, let comment):
-            return [
-                "id": id,
-                "amount": amount,
-                "rate": rate,
-                "comment": comment
-            ]
+            if let comment = comment {
+                return [
+                    "id": id,
+                    "amount": amount,
+                    "rate": rate,
+                    "comment": comment
+                ]
+            } else {
+                return [
+                    "id": id,
+                    "amount": amount,
+                    "rate": rate
+                ]
+            }
         default:
             return nil
         }
