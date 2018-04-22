@@ -76,6 +76,7 @@ class RestaurantDetailesView: UIView {
         addressLabel.snp.makeConstraints {
             $0.left.equalTo(nameLabel)
             $0.centerY.equalTo(restaurantImageView).multipliedBy(1.3)
+            $0.right.equalTo(ratingContentView.snp.left).offset(-5)
         }
         
         ratingContentView.snp.makeConstraints {
