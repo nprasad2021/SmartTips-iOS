@@ -17,9 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
         AppConfigurator.shared.run()
-        
+        UITabBar.appearance().tintColor = UIColor(red: 255/255, green: 160/255, blue: 160/255, alpha: 1.0)
         let strongWindow = UIWindow(frame: UIScreen.main.bounds)
         self.window = strongWindow
         router = RootRouter(window: strongWindow)

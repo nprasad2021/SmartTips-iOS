@@ -39,7 +39,7 @@ class TipOnboardingViewController: ViewController {
         
         title = "Tip!"
         
-        tabBarItem = UITabBarItem(title: "Scanning", image: #imageLiteral(resourceName: "qr"), selectedImage: nil)
+        tabBarItem = UITabBarItem(title: "Scanning", image: #imageLiteral(resourceName: "qr").withRenderingMode(.alwaysTemplate), selectedImage: nil)
         view.backgroundColor = UIColor.stWhite
         
         setViews()

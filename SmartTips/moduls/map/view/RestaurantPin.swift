@@ -8,7 +8,7 @@ class RestaurantPin: NMAMapMarker {
     
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
-        super.init(geoCoordinates: restaurant.location.toNMALocation, image: #imageLiteral(resourceName: "pin"))
+        super.init(geoCoordinates: restaurant.location.toNMALocation, image: #imageLiteral(resourceName: "pin").withRenderingMode(.alwaysTemplate))
         self.title = restaurant.name
     }
     
