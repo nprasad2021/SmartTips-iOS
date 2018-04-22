@@ -30,7 +30,15 @@ class CameraViewController: ViewController {
         view.layoutIfNeeded()
         configureAVSession()
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if navigationController?.isNavigationBarHidden == true {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+
     private func setViews() {
         view.addSubview(qrCodeFrameView)
         view.addSubview(cameraSquare)
@@ -48,7 +56,7 @@ class CameraViewController: ViewController {
     }
     
     private func configureAVSession() {
-        guard let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInDualCamera, for: .video, position: .back) else { return }
+        guard let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInWideAngleCamera, for: .video, position: .back) else { return }
         
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice)

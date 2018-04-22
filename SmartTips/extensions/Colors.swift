@@ -39,7 +39,7 @@ extension UIColor {
   }
 
   class var stBlue: UIColor {
-    return UIColor(hex: "#2F23A1")
+    return UIColor(red: 255/255, green: 160/255, blue: 160/255, alpha: 1.0)
   }
 
   class var stLightBlue: UIColor {

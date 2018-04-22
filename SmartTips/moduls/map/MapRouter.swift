@@ -7,7 +7,7 @@ class MapRouter: RouterContract {
         let router = MapRouter()
         guard let view = UIStoryboard(name: storyboardMapIdentifier, bundle: Bundle.main).instantiateInitialViewController() as? MapViewController else { fatalError() }
         view.router = router
-        view.tabBarItem = UITabBarItem(title: "Map", image: #imageLiteral(resourceName: "map"), selectedImage: nil)
+        view.tabBarItem = UITabBarItem(title: "Map", image: #imageLiteral(resourceName: "map").withRenderingMode(.alwaysTemplate), selectedImage: nil)
         router.view = view
         return view
     }

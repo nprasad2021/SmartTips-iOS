@@ -4,11 +4,17 @@ import RxSwift
 
 class TipOnboardingViewController: ViewController {
     private var items: [OnboardingItemView] = []
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = #imageLiteral(resourceName: "logo")
+        return imageView
+    }()
     private let scanButton: UIButton = {
         let button = UIButton()
         button.setTitle("SCAN", for: .normal)
         button.layer.cornerRadius = 6
-        button.backgroundColor = UIColor.stBlue
+        button.backgroundColor = UIColor(red: 255/255, green: 160/255, blue: 160/255, alpha: 1.0)
         button.titleLabel?.font = UIFont.stHelveticaBold(ofSize: 15)
         return button
     }()
@@ -33,14 +39,28 @@ class TipOnboardingViewController: ViewController {
         
         title = "Tip!"
         
-        tabBarItem = UITabBarItem(title: "Scanning", image: #imageLiteral(resourceName: "qr"), selectedImage: nil)
+        tabBarItem = UITabBarItem(title: "Scanning", image: #imageLiteral(resourceName: "qr").withRenderingMode(.alwaysTemplate), selectedImage: nil)
         view.backgroundColor = UIColor.stWhite
         
         setViews()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if navigationController?.isNavigationBarHidden == false {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+    }
     
     private func setViews() {
-        var topConstraint = view.snp.top
+        view.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview().inset(35)
+        }
+        var topConstraint = logoImageView.snp.bottom
         var offset: CGFloat = 0.0
         titles.enumerated().forEach { (index, title) in
             let item = OnboardingItemView()
@@ -57,7 +77,7 @@ class TipOnboardingViewController: ViewController {
         }
         
         view.addSubview(scanButton)
-        
+
         scanButton.rx.tap.bind { [weak self] in
             // present
             let view = CameraViewController()
