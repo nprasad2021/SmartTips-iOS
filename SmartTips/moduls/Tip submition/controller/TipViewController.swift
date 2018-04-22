@@ -69,7 +69,7 @@ class TipViewController: ViewController {
             procents = [10, number, 15]
         }
         
-        return procents
+        return procents.sorted(by: { $0 < $1 })
     }
     
     private func setTitles(_ average: Double) {
@@ -127,9 +127,9 @@ class TipViewController: ViewController {
             amount = percentages[selectedIndex]
         }
         
-        NetworkingManager.shared.requestWithSuccessStatus(.postTip(id: id, amount: amount, rate: (Double(amount) / orderSum).round(toDigits: 2), comment: cell.comment))
+        NetworkingManager.shared.requestWithSuccessStatus(.postTip(id: id, amount: amount, rate: (Double(orderSum) / amount / 100).round(toDigits: 2), comment: cell.comment))
             .subscribe(onNext: { (_) in
-                let alert = UIAlertController(title: "Tip was sent!", message: nil, preferredStyle: .alert)
+                let alert = UIAlertController(title: "\((Double(self.orderSum) / amount).round(toDigits: 2)) RUB was sent!", message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okey", style: .default, handler: { (_) in
                     self.tabBarController?.selectedIndex = 1
                     self.navigationController?.popToRootViewController(animated: false)
