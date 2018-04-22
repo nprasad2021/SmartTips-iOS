@@ -48,7 +48,7 @@ class CameraViewController: ViewController {
     }
     
     private func configureAVSession() {
-        guard let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInDualCamera, for: .video, position: .back) else { return }
+        guard let captureDevice = AVCaptureDevice.default(AVCaptureDevice.DeviceType.builtInWideAngleCamera, for: .video, position: .back) else { return }
         
         do {
             let input = try AVCaptureDeviceInput(device: captureDevice)
